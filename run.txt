@@ -1,0 +1,8 @@
+在系统终  terminator 端上查看DISPLAY
+$ env | grep DISPLAY	# 获取屏幕
+DISPLAY=:0
+
+# 在VSCode的终端上设置DISPLAY
+$ export DISPLAY=:0
+
+python ToolFuncs.py
