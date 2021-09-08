@@ -29,12 +29,19 @@
       <height>473</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="currentIndex">
      <number>2</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
-      <string>商品DSR提取</string>
+      <string>Record Your Face</string>
      </attribute>
      <widget class="QGroupBox" name="groupBox_11">
       <property name="geometry">
@@ -209,7 +216,7 @@
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>天猫主图提取</string>
+      <string>Sign in Daily</string>
      </attribute>
      <widget class="QGroupBox" name="groupBox_21">
       <property name="geometry">
@@ -335,7 +342,7 @@
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
-      <string>图片批量下载</string>
+      <string>Violate</string>
      </attribute>
      <widget class="QGroupBox" name="groupBox_31">
       <property name="geometry">
@@ -455,11 +462,11 @@
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="groupBox_32">
+     <widget class="QGroupBox" name="groupBox_23">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>10</y>
+        <x>20</x>
+        <y>20</y>
         <width>535</width>
         <height>151</height>
        </rect>
@@ -477,7 +484,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;1、程序运行可以按照所给图片链接下载图片并按要求给图片命名&lt;/p&gt;&lt;p&gt;2、在程序所在目录创建一个文本，在其中放入图片链接和名称，每行放一个&lt;/p&gt;&lt;p&gt;3、文件中格式如：1234,https://img1234.jpg，即名称和链接用英文逗号连接&lt;/p&gt;&lt;p&gt;4、输入包含链接的文件名称和图片保存文件夹名称，按开始按钮开始下载图片&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;1、程序运行可以获取天猫商品的主图链接和价格（原价&amp;amp;折扣价）&lt;/p&gt;&lt;p&gt;2、在程序所在目录创建一个文本文件，在其中放入商品ID，每行放一个&lt;/p&gt;&lt;p&gt;3、在文件名称输入框中输入放有商品ID的文件名称或直接使用默认文件名称&lt;/p&gt;&lt;p&gt;4、上述步骤完成后按下开始按钮，等待程序运行结束后获取信息表格&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>
@@ -490,12 +497,16 @@
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_F">
     <property name="title">
-     <string>文件(F)</string>
+     <string>File</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>White/Cho-Katsu Kome.ico</normaloff>White/Cho-Katsu Kome.ico</iconset>
     </property>
     <addaction name="actionOpenfile"/>
     <addaction name="separator"/>
@@ -503,7 +514,7 @@
    </widget>
    <widget class="QMenu" name="menu_H">
     <property name="title">
-     <string>帮助(H)</string>
+     <string>Help[H]</string>
     </property>
     <addaction name="actionAbout"/>
     <addaction name="separator"/>
@@ -516,10 +527,10 @@
   <action name="actionOpenfile">
    <property name="icon">
     <iconset>
-     <normaloff>Icon/2017522122222.ico</normaloff>Icon/2017522122222.ico</iconset>
+     <normaloff>White/Archer.ico</normaloff>White/Archer.ico</iconset>
    </property>
    <property name="text">
-    <string>查看文件夹</string>
+    <string>Check folder</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -528,10 +539,10 @@
   <action name="actionQiut">
    <property name="icon">
     <iconset>
-     <normaloff>Icon/ooopic_1495455270.ico</normaloff>Icon/ooopic_1495455270.ico</iconset>
+     <normaloff>White/Chief Chujo.ico</normaloff>White/Chief Chujo.ico</iconset>
    </property>
    <property name="text">
-    <string>退出</string>
+    <string>Quit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -543,7 +554,7 @@
      <normaloff>Icon/201752212221.ico</normaloff>Icon/201752212221.ico</iconset>
    </property>
    <property name="text">
-    <string>关于</string>
+    <string>About</string>
    </property>
   </action>
   <action name="actionAuthor">
@@ -552,7 +563,7 @@
      <normaloff>Icon/2017522122216.ico</normaloff>Icon/2017522122216.ico</iconset>
    </property>
    <property name="text">
-    <string>作者</string>
+    <string>Author</string>
    </property>
   </action>
  </widget>
