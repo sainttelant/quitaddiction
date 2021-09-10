@@ -61,7 +61,8 @@ class MainUI(Ui_MainWindow):
         self.statusbar.setStyleSheet("color:green")
         self.pushButton_5.setDisabled(True)  # 线程启动锁定按钮
         self.textEdit_3.setText("")  # 插入一个空白，每次启动线程都可以清屏
-        txtname = self.textEdit_4.text()
+        txtname = self.lineEdit_34.text()
+        """
         product = self.changePD()
         self.dsrthread = dsrThread(txtname, product)
         self.dsrthread.status_signal.connect(self.statusshow)
@@ -70,7 +71,7 @@ class MainUI(Ui_MainWindow):
         self.dsrthread.dsrprog_signal.connect(self.dsrprog_value)
         self.dsrthread.finished.connect(self.dsrpushon)  # 线程结束执行函数
         self.dsrthread.start()
-
+        """
     # 线程结束后开启DSR按钮
     def dsrpushon(self):
         self.pushButton_1.setDisabled(False)
@@ -103,14 +104,14 @@ class MainUI(Ui_MainWindow):
         self.linkthread.start()
 
     def linkpushon(self):
-        self.pushButton_2.setDisabled(False)
+        self.pushButton_3.setDisabled(False)
 
     def linktextshow(self, astr):
-        self.textEdit_2.append(astr)
+        self.textEdit_4.append(astr)
 
     def linkprog_max(self, n):
-        self.progressBar_2.setMinimum(0)
-        self.progressBar_2.setMaximum(n)
+        self.progressBar_4.setMinimum(0)
+        self.progressBar_4.setMaximum(n)
 
     def linkprog_value(self, i):
         self.progressBar_2.setValue(i)
