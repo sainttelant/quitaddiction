@@ -12,26 +12,27 @@ import os.path
 class MainUI(Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        self.aboutmsg = "程序使用PYQT5编写，最新版本4.2\n\n本软件的设计初衷是为了解决本人个人工作中的某些任务，" \
-                        "但是本着通用性和共享的原则，本软件可以扩展用到工作之外，不过软件还有很多不足之处有待完善。\n\n" \
-                        "程序分为三个功能，前两个功能涉及到利用爬虫技术爬取网站信息，因此一旦网页内容有较大变动，" \
-                        "则原信息提取方式会失效，程序也会自动报错，如若程序无法继续使用，可以联系作者进行反馈！！\n\n" \
-                        "编译日期：2017-5-27\n"
-        self.authormsg = "作者：爱尔兰咖啡\n\nGithub：https://github.com/Hopetree\n\n如果对本款小工具有疑问或者发现Bug，" \
-                         "可以与本人联系交流！\n\n联系QQ：675737972\n"
+        self.aboutmsg = "version1.0\n\n The aim of this software is to help people to quit addictions" \
+                        "Fuction 1、Sign in everyday,and Record your apprearance varying \n\n" \
+                        "Fuction 2、Daily hits or Wisdom words \n\n " \
+                        "Fuction 3、Punishment mechanism, violate rules will randomly delete one of \n\n" \
+                        "your favourable videos, where you specified folder path \n\n" \
+                        "Date：2021-9-8\n"
+        self.authormsg = "Author:wilson\n" \
+                         "Contact me\nQQ：525324158\n"
 
         self.actionOpenfile.triggered.connect(QtWidgets.QFileDialog.getOpenFileName)  # 查看当前文件夹
         self.actionQiut.triggered.connect(self.close)  # 菜单栏退出按钮函数
-        self.actionAbout.triggered.connect(lambda: self.selectInfo("关于软件", self.aboutmsg))  # 关于软件
-        self.actionAuthor.triggered.connect(lambda: self.selectInfo("作者", self.authormsg))  # 关于作者
-        self.pushButton_1.clicked.connect(self.startdsr)  # DSR开始按钮
-        self.pushButton_2.clicked.connect(self.startlink)  # 主图开始按钮
-        self.pushButton_3.clicked.connect(self.startimg)  # 批量下载图片开始按钮
+        self.actionAbout.triggered.connect(lambda: self.selectInfo("About", self.aboutmsg))  # 关于软件
+        self.actionAuthor.triggered.connect(lambda: self.selectInfo("Author", self.authormsg))  # 关于作者
+        self.pushButton_3.clicked.connect(self.startdsr)  # DSR开始按钮
+        self.pushButton_4.clicked.connect(self.startlink)  # 主图开始按钮
+        self.pushButton_5.clicked.connect(self.startimg)  # 批量下载图片开始按钮
 
     # 重写关闭函数
     def closeEvent(self, event):
-        reply = QtWidgets.QMessageBox.question(self, '关闭程序',
-                                               "关闭程序可能导致正在进行的操作终止，请确认\n是否退出并关闭程序？",
+        reply = QtWidgets.QMessageBox.question(self, 'Close',
+                                               "Close will terminate the downloading process,verify\nClose？",
                                                QtWidgets.QMessageBox.Yes, QtWidgets.QMessageBox.No)
         if reply == QtWidgets.QMessageBox.Yes:
             event.accept()
@@ -58,9 +59,9 @@ class MainUI(Ui_MainWindow):
     # 启动DSR线程的槽函数
     def startdsr(self):
         self.statusbar.setStyleSheet("color:green")
-        self.pushButton_1.setDisabled(True)  # 线程启动锁定按钮
-        self.textEdit_1.setText("")  # 插入一个空白，每次启动线程都可以清屏
-        txtname = self.lineEdit_1.text()
+        self.pushButton_5.setDisabled(True)  # 线程启动锁定按钮
+        self.textEdit_3.setText("")  # 插入一个空白，每次启动线程都可以清屏
+        txtname = self.textEdit_4.text()
         product = self.changePD()
         self.dsrthread = dsrThread(txtname, product)
         self.dsrthread.status_signal.connect(self.statusshow)
@@ -90,9 +91,9 @@ class MainUI(Ui_MainWindow):
     # 主图链接槽函数------------------------------------------------------------------------------------------------
     def startlink(self):
         self.statusbar.setStyleSheet("color:blue")
-        self.pushButton_2.setDisabled(True)  # 线程启动锁定按钮
-        self.textEdit_2.setText("")  # 插入一个空白，每次启动线程都可以清屏
-        txtname = self.lineEdit_2.text()
+        self.pushButton_3.setDisabled(True)  # 线程启动锁定按钮
+        self.textEdit_4.setText("")  # 插入一个空白，每次启动线程都可以清屏
+        txtname = self.lineEdit_34.text()
         self.linkthread = linkThread(txtname)
         self.linkthread.status_signal.connect(self.statusshow)
         self.linkthread.linktext_signal.connect(self.linktextshow)

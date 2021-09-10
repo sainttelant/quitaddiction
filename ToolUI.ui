@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>540</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>640</width>
-    <height>540</height>
+    <width>1280</width>
+    <height>720</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -25,8 +25,8 @@
      <rect>
       <x>20</x>
       <y>4</y>
-      <width>604</width>
-      <height>473</height>
+      <width>1241</width>
+      <height>661</height>
      </rect>
     </property>
     <property name="font">
@@ -37,123 +37,64 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
       <string>Record Your Face</string>
      </attribute>
-     <widget class="QGroupBox" name="groupBox_11">
+     <widget class="QGroupBox" name="groupBox_25">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>10</y>
-        <width>535</width>
-        <height>151</height>
+        <x>320</x>
+        <y>40</y>
+        <width>601</width>
+        <height>201</height>
        </rect>
       </property>
       <property name="title">
-       <string>操作流程</string>
+       <string>Instruction</string>
       </property>
       <widget class="QLabel" name="label_11">
        <property name="geometry">
         <rect>
          <x>50</x>
          <y>18</y>
-         <width>461</width>
-         <height>123</height>
+         <width>471</width>
+         <height>141</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;1、程序运行可以获取天猫或京东商品的DSR信息并生成数据表格&lt;/p&gt;&lt;p&gt;2、在程序所在目录创建一个文本文件，在其中放入商品ID，每行放一个&lt;/p&gt;&lt;p&gt;3、在文件名称输入框中输入放有商品ID的文件名称或直接使用默认文件名称&lt;/p&gt;&lt;p&gt;4、选择商品类型，启动开始按钮，等待程序运行结束后获取信息表格&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;1、sign in everyday, if you don't break the ring,release yourself &lt;/p&gt;&lt;p&gt;2、Record your progress everyday, you will witness your success!&lt;/p&gt;&lt;p&gt;3、click violate if you break the ring, a little trick punishment&lt;/p&gt;&lt;p&gt;4、Inform your community or friends what is your trouble &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="groupBox_12">
+     <widget class="QGroupBox" name="groupBox_33">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>180</y>
-        <width>535</width>
-        <height>251</height>
+        <x>310</x>
+        <y>260</y>
+        <width>631</width>
+        <height>361</height>
        </rect>
       </property>
       <property name="title">
-       <string>运行过程</string>
+       <string> Begin to Run!</string>
       </property>
-      <widget class="QLabel" name="label_4">
+      <widget class="QProgressBar" name="progressBar_5">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>30</y>
-         <width>60</width>
-         <height>24</height>
+         <x>289</x>
+         <y>75</y>
+         <width>201</width>
+         <height>20</height>
         </rect>
        </property>
-       <property name="text">
-        <string>文件名称：</string>
+       <property name="value">
+        <number>24</number>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_1">
-       <property name="geometry">
-        <rect>
-         <x>102</x>
-         <y>30</y>
-         <width>156</width>
-         <height>24</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton_1">
-       <property name="geometry">
-        <rect>
-         <x>270</x>
-         <y>26</y>
-         <width>110</width>
-         <height>32</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string>天猫商品</string>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>Icon/e52d9567c015cdb440344305380739e7.png</normaloff>Icon/e52d9567c015cdb440344305380739e7.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>30</width>
-         <height>30</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton_2">
-       <property name="geometry">
-        <rect>
-         <x>398</x>
-         <y>26</y>
-         <width>111</width>
-         <height>32</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>京东商品</string>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>Icon/b721a1c9956b6e836cbdb6c57691ef09.png</normaloff>Icon/b721a1c9956b6e836cbdb6c57691ef09.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>22</width>
-         <height>22</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_1">
+      <widget class="QPushButton" name="pushButton_5">
        <property name="geometry">
         <rect>
          <x>40</x>
@@ -163,7 +104,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>开始</string>
+        <string>Begin</string>
        </property>
        <property name="icon">
         <iconset>
@@ -176,39 +117,72 @@
         </size>
        </property>
       </widget>
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="label_16">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>72</y>
-         <width>71</width>
+         <x>40</x>
+         <y>30</y>
+         <width>60</width>
          <height>24</height>
         </rect>
        </property>
        <property name="text">
-        <string>完成进度：</string>
+        <string>Files name:</string>
        </property>
       </widget>
-      <widget class="QProgressBar" name="progressBar_1">
+      <widget class="QLineEdit" name="lineEdit_35">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>75</y>
-         <width>250</width>
-         <height>20</height>
+         <x>102</x>
+         <y>30</y>
+         <width>141</width>
+         <height>24</height>
         </rect>
        </property>
-       <property name="value">
-        <number>24</number>
-       </property>
       </widget>
-      <widget class="QTextEdit" name="textEdit_1">
+      <widget class="QTextEdit" name="textEdit_5">
        <property name="geometry">
         <rect>
          <x>40</x>
          <y>120</y>
-         <width>455</width>
-         <height>121</height>
+         <width>561</width>
+         <height>231</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_17">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>72</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>progress bar:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_18">
+       <property name="geometry">
+        <rect>
+         <x>277</x>
+         <y>30</y>
+         <width>68</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Photo:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_36">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>30</y>
+         <width>141</width>
+         <height>24</height>
         </rect>
        </property>
       </widget>
@@ -218,55 +192,58 @@
      <attribute name="title">
       <string>Sign in Daily</string>
      </attribute>
-     <widget class="QGroupBox" name="groupBox_21">
+     <widget class="QGroupBox" name="groupBox_24">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>180</y>
-        <width>535</width>
-        <height>251</height>
+        <x>290</x>
+        <y>40</y>
+        <width>601</width>
+        <height>201</height>
        </rect>
       </property>
       <property name="title">
-       <string>运行过程</string>
+       <string>Instruction</string>
       </property>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLabel" name="label_12">
        <property name="geometry">
         <rect>
-         <x>102</x>
-         <y>30</y>
-         <width>156</width>
-         <height>24</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_6">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>30</y>
-         <width>60</width>
-         <height>24</height>
+         <x>50</x>
+         <y>18</y>
+         <width>471</width>
+         <height>141</height>
         </rect>
        </property>
        <property name="text">
-        <string>文件名称：</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;1、sign in everyday, if you don't break the ring,release yourself &lt;/p&gt;&lt;p&gt;2、Record your progress everyday, you will witness your success!&lt;/p&gt;&lt;p&gt;3、click violate if you break the ring, a little trick punishment&lt;/p&gt;&lt;p&gt;4、Inform your community or friends what is your trouble &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_7">
+     </widget>
+     <widget class="QGroupBox" name="groupBox_32">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>260</y>
+        <width>631</width>
+        <height>361</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string> Begin to Run!</string>
+      </property>
+      <widget class="QProgressBar" name="progressBar_4">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>72</y>
-         <width>71</width>
-         <height>24</height>
+         <x>289</x>
+         <y>75</y>
+         <width>201</width>
+         <height>20</height>
         </rect>
        </property>
-       <property name="text">
-        <string>完成进度：</string>
+       <property name="value">
+        <number>24</number>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="pushButton_4">
        <property name="geometry">
         <rect>
          <x>40</x>
@@ -276,7 +253,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>开始</string>
+        <string>Begin</string>
        </property>
        <property name="icon">
         <iconset>
@@ -289,53 +266,73 @@
         </size>
        </property>
       </widget>
-      <widget class="QProgressBar" name="progressBar_2">
+      <widget class="QLabel" name="label_13">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>75</y>
-         <width>250</width>
-         <height>20</height>
+         <x>40</x>
+         <y>30</y>
+         <width>60</width>
+         <height>24</height>
         </rect>
        </property>
-       <property name="value">
-        <number>24</number>
+       <property name="text">
+        <string>Files name:</string>
        </property>
       </widget>
-      <widget class="QTextEdit" name="textEdit_2">
+      <widget class="QLineEdit" name="lineEdit_33">
+       <property name="geometry">
+        <rect>
+         <x>102</x>
+         <y>30</y>
+         <width>141</width>
+         <height>24</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="textEdit_4">
        <property name="geometry">
         <rect>
          <x>40</x>
          <y>120</y>
-         <width>455</width>
-         <height>121</height>
+         <width>561</width>
+         <height>231</height>
         </rect>
        </property>
       </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_22">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>10</y>
-        <width>535</width>
-        <height>151</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>操作流程</string>
-      </property>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="label_14">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>18</y>
-         <width>461</width>
-         <height>123</height>
+         <x>160</x>
+         <y>72</y>
+         <width>101</width>
+         <height>24</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;1、程序运行可以获取天猫商品的主图链接和价格（原价&amp;amp;折扣价）&lt;/p&gt;&lt;p&gt;2、在程序所在目录创建一个文本文件，在其中放入商品ID，每行放一个&lt;/p&gt;&lt;p&gt;3、在文件名称输入框中输入放有商品ID的文件名称或直接使用默认文件名称&lt;/p&gt;&lt;p&gt;4、上述步骤完成后按下开始按钮，等待程序运行结束后获取信息表格&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>progress bar:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>277</x>
+         <y>30</y>
+         <width>68</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Photo:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_34">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>30</y>
+         <width>141</width>
+         <height>24</height>
+        </rect>
        </property>
       </widget>
      </widget>
@@ -347,21 +344,21 @@
      <widget class="QGroupBox" name="groupBox_31">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>180</y>
-        <width>535</width>
-        <height>251</height>
+        <x>330</x>
+        <y>230</y>
+        <width>631</width>
+        <height>361</height>
        </rect>
       </property>
       <property name="title">
-       <string>运行过程</string>
+       <string> Begin to Run!</string>
       </property>
       <widget class="QProgressBar" name="progressBar_3">
        <property name="geometry">
         <rect>
-         <x>240</x>
+         <x>289</x>
          <y>75</y>
-         <width>250</width>
+         <width>201</width>
          <height>20</height>
         </rect>
        </property>
@@ -379,7 +376,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>开始</string>
+        <string>Begin</string>
        </property>
        <property name="icon">
         <iconset>
@@ -402,7 +399,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>文件名称：</string>
+        <string>Files name:</string>
        </property>
       </widget>
       <widget class="QLineEdit" name="lineEdit_31">
@@ -420,8 +417,8 @@
         <rect>
          <x>40</x>
          <y>120</y>
-         <width>455</width>
-         <height>121</height>
+         <width>561</width>
+         <height>231</height>
         </rect>
        </property>
       </widget>
@@ -430,12 +427,12 @@
         <rect>
          <x>160</x>
          <y>72</y>
-         <width>71</width>
+         <width>101</width>
          <height>24</height>
         </rect>
        </property>
        <property name="text">
-        <string>完成进度：</string>
+        <string>progress bar:</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_10">
@@ -448,7 +445,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>图片文件夹：</string>
+        <string>Photo:</string>
        </property>
       </widget>
       <widget class="QLineEdit" name="lineEdit_32">
@@ -465,26 +462,26 @@
      <widget class="QGroupBox" name="groupBox_23">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>340</x>
         <y>20</y>
-        <width>535</width>
-        <height>151</height>
+        <width>601</width>
+        <height>201</height>
        </rect>
       </property>
       <property name="title">
-       <string>操作流程</string>
+       <string>Instruction</string>
       </property>
       <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
          <x>50</x>
          <y>18</y>
-         <width>461</width>
-         <height>123</height>
+         <width>471</width>
+         <height>141</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;1、程序运行可以获取天猫商品的主图链接和价格（原价&amp;amp;折扣价）&lt;/p&gt;&lt;p&gt;2、在程序所在目录创建一个文本文件，在其中放入商品ID，每行放一个&lt;/p&gt;&lt;p&gt;3、在文件名称输入框中输入放有商品ID的文件名称或直接使用默认文件名称&lt;/p&gt;&lt;p&gt;4、上述步骤完成后按下开始按钮，等待程序运行结束后获取信息表格&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;1、sign in everyday, if you don't break the ring,release yourself &lt;/p&gt;&lt;p&gt;2、Record your progress everyday, you will witness your success!&lt;/p&gt;&lt;p&gt;3、click violate if you break the ring, a little trick punishment&lt;/p&gt;&lt;p&gt;4、Inform your community or friends what is your trouble &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>
@@ -496,7 +493,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>640</width>
+     <width>1280</width>
      <height>22</height>
     </rect>
    </property>
@@ -567,8 +564,6 @@
    </property>
   </action>
  </widget>
- <resources>
-  <include location="tool.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
