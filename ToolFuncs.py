@@ -8,7 +8,7 @@ import time
 import cv2
 from PyQt5 import QtCore, QtWidgets
 
-from APIs import Spiders
+from APIs import SignSpider, Spiders
 from ToolUI import Ui_MainWindow
 
 
@@ -32,11 +32,13 @@ class MainUI(Ui_MainWindow):
         self.actionAuthor.triggered.connect(
             lambda: self.selectInfo("Author", self.authormsg))  # 关于作者
         self.pushButton_3.clicked.connect(self.startdsr)  # DSR开始按钮
-        self.pushButton_4.clicked.connect(self.startlink)  # 主图开始按钮
+        #self.pushButton_4.clicked.connect(self.startlink)  # 主图开始按钮
 
         # capture button click
         # self.pushButton_5.clicked.connect(self.startimg)  # 批量下载图片开始按钮
         self.pushButton_5.clicked.connect(self.capture)
+        # 签到是pushbotton4 ， 显示是 text4
+        self.pushButton_4.clicked.connect(self.sign)
 
     # 重写关闭函数
 
@@ -152,11 +154,27 @@ class MainUI(Ui_MainWindow):
         self.capthread.finished.connect(self.imgpushon)
         self.capthread.start()
 
+    def sign(self):
+        print("begin to sign everyday")
+        self.pushButton_4.setDisabled(True)
+        self.textEdit_4.setText("")
+        self.sign = sign()
+        self.sign.signtext_signal.connect(self.signtextshow)
+        self.sign.finished.connect(self.signpushon)
+        self.sign.start()
+    
+
     def imgpushon(self):
         self.pushButton_5.setDisabled(False)
 
+    def signpushon(self):
+        self.pushButton_4.setDisabled(False)
+
     def imgtextshow(self, astr):
         self.textEdit_5.append(astr)
+
+    def signtextshow(self,astr):
+        self.textEdit_4.append(astr)
 
     def imgprog_max(self, n):
         self.progressBar_3.setMinimum(0)
@@ -282,12 +300,29 @@ class linkThread(QtCore.QThread):
                     self.linktext_signal.emit(
                         self.api.getmsg(msg_c, "#464749"))
                     self.progvalue_signal.emit(i)
+                    
                 i += 1
             end = time.time()
             msg_d = "天猫主图链接提取完毕，耗时：%0.2f秒！\n数据保存在当前目录下表格  %s  中" % (
                 float(end - start), outfile)
             self.linktext_signal.emit(self.api.getmsg(msg_d, "green"))
         self.status_signal.emit("当前状态：天猫主图信息提取操作完毕！")
+
+class sign(QtCore.QThread):
+    sign_signal  =QtCore.pyqtSignal(str)
+    signtext_signal = QtCore.pyqtSignal(str)
+
+    def __init__(self):
+        super().__init__()
+        self.api = SignSpider()
+
+    def run(self):
+        self.signtext_signal.emit("click sign if you keep good habits!!")
+        text = self.api.Gethits()
+        self.signtext_signal.emit(text)
+
+    
+
 
 
 class capThread(QtCore.QThread):

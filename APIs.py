@@ -4,6 +4,76 @@ import requests
 import json
 import re
 from bs4 import BeautifulSoup as bs
+import os
+import random
+
+
+class SignSpider(object):
+    def __init__(self):
+        print("init SignSpider!")
+        self.headers = {
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            'Accept-Encoding': 'gzip, deflate br',
+            'Accept-Language': 'zh-CN,zh;q=0.9',
+            'Cache-Control': 'max-age=0',
+            'Connection': 'keep-alive',
+            'Host': 'www.yuluju.com',
+
+            'Cookie': 't=c675829116dca487cfd430cba9b715e9; r=1548; UM_distinctid=17c10b515c24a2-0f72a0a46a6f49-4343363-144000-17c10b515c3a9d; CNZZDATA1279885104=1915752153-1632363048-null%7C1632363048',
+            'Referer': 'http://www.yuluju.com/lizhimingyan/',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36'
+        }
+        self.url = "http://www.yuluju.com/lizhimingyan/"
+        self.s = requests.Session()
+        self.s.keep_alive = False
+        self.path = os.getcwd()+"/wisdom"
+        self.filename = self.path+"/wisdoms.txt"
+        self.sentense = []
+        if not os.path.exists(os.getcwd() + "/wisdom"):
+            os.makedirs(os.getcwd() + "/wisdom")
+
+    def Gethits(self):
+        a = ""
+        k = random.randint(0, 50)
+        j = 0
+        if not os.path.exists(self.filename):
+            with open(self.path+"/wisdoms.txt", "a") as f:
+                print("begin to get hits!")
+                ret = self.s.get(self.url, headers=self.headers)
+                ret.encoding = ret.apparent_encoding
+                if ret.status_code == 200:
+                    print(ret.headers['content-type'])
+                    msg = "get hits'channel successfull!"
+                    soup = bs(ret.text, "html.parser")
+                    for text in soup.select("ul li h2 a.title"):
+
+                        href = "http://www.yuluju.com"+text['href']
+                        newret = self.s.get(href, headers=self.headers)
+                        newret.encoding = newret.apparent_encoding
+                        if newret.status_code == 200:
+                            print("access detail's web successfully")
+                            soups = bs(newret.text, "lxml")
+                            for infors in soups.select("div div span"):
+                                j += 1
+                                f.write(infors.get_text()+'\n')
+                                if j==k:
+                                    a = infors.get_text()
+                else:
+                    msg = "get hits'channel failure! check the internet request!"
+                    print(msg)
+                    return msg
+        else:
+            print("gethits locally!")
+            with open(self.filename, "r") as f:
+                lines = f.readlines()
+                for line in lines:
+                    self.sentense.append(line)
+
+            size_sentense = len(self.sentense)
+            print(self.sentense[random.randint(0, size_sentense)])
+            a = self.sentense[random.randint(0, size_sentense)]
+
+        return a
 
 
 class Spiders(object):
@@ -13,10 +83,10 @@ class Spiders(object):
         self.headers_m = {'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 '
                                         '(KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1'}
 
-
     # 形成富文本，参数是文本内容和字体颜色
-    def getmsg(self,themsg,thecolor):
-        msg = '<html><head/><body><p><span style=" font-family:Microsoft YaHei;font-size:9pt; color:{};">{}</span></p></body></html>'.format(thecolor,themsg)
+    def getmsg(self, themsg, thecolor):
+        msg = '<html><head/><body><p><span style=" font-family:Microsoft YaHei;font-size:9pt; color:{};">{}</span></p></body></html>'.format(
+            thecolor, themsg)
         return msg
 
     # 从文件读取信息，返回一个列表
@@ -36,7 +106,8 @@ class Spiders(object):
         html = res.text
         date = re.findall('json.*?\((.*)\)', html)[0]
         dsr = json.loads(date)['dsr']  # 转换成字典格式
-        DSR = id + ',' + str(dsr['gradeAvg']).strip() + ',' + str(dsr['rateTotal']).strip()
+        DSR = id + ',' + str(dsr['gradeAvg']).strip() + \
+            ',' + str(dsr['rateTotal']).strip()
         with open(outfile, 'a') as f:
             f.write(DSR + '\n')
         return
@@ -52,7 +123,8 @@ class Spiders(object):
         GoodCount = str(dic['GoodCount']).strip()  # 好评数
         GeneralCount = str(dic['GeneralCount']).strip()  # 中评数
         PoorCount = str(dic['PoorCount']).strip()  # 差评数
-        DSR = SkuId + ',' + GoodRate + ',' + GoodCount + ',' + GeneralCount + ',' + PoorCount
+        DSR = SkuId + ',' + GoodRate + ',' + GoodCount + \
+            ',' + GeneralCount + ',' + PoorCount
         with open(outfile, 'a') as f:
             f.write(DSR + '\n')
         return
@@ -64,7 +136,8 @@ class Spiders(object):
         html = requests.get(url, headers=self.headers_m).text
         try:
             soup = bs(html, "lxml")
-            imglink = "https:" + soup.select("div.itbox > a > img")[0].get("src")
+            imglink = "https:" + \
+                soup.select("div.itbox > a > img")[0].get("src")
         except:
             imglink = "miss"
         infos = re.findall('"price":"(\d+?\.\d\d)"', html)
