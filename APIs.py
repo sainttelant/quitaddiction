@@ -6,6 +6,7 @@ import re
 from bs4 import BeautifulSoup as bs
 import os
 import random
+import time
 
 
 class SignSpider(object):
@@ -29,8 +30,83 @@ class SignSpider(object):
         self.path = os.getcwd()+"/wisdom"
         self.filename = self.path+"/wisdoms.txt"
         self.sentense = []
+        self.day = 0
+
+        # 当前日期
+        self.time =  time.strftime('%Y-%m-%d', time.localtime(time.time()))
+
+        self.summary = os.getcwd()+"/signsummary"
+        self.summaryfile = self.summary+"/summary.txt"
+        if not os.path.exists(self.summary):
+            os.makedirs(self.summary)
         if not os.path.exists(os.getcwd() + "/wisdom"):
             os.makedirs(os.getcwd() + "/wisdom")
+    
+    def getlastline(self):
+        """
+        get last line of a file
+        :param filename: file name
+        :return: last line or None for empty file
+        """
+        try:
+            filesize = os.path.getsize(self.summaryfile)
+            if filesize == 0:
+                return None
+            else:
+                with open(self.summaryfile, 'rb') as fp: # to use seek from end, must use mode 'rb'
+                    offset = -8                 # initialize offset
+                    while -offset < filesize:   # offset cannot exceed file size
+                        fp.seek(offset, 2)      # read # offset chars from eof(represent by number '2')
+                        lines = fp.readlines()  # read from fp to eof
+                        if len(lines) >= 2:     # if contains at least 2 lines
+                            return lines[-1]    # then last line is totally included
+                        else:
+                            offset *= 2         # enlarge offset
+                    fp.seek(0)
+                    lines = fp.readlines()
+                    return lines[-1]
+        except FileNotFoundError:
+            print(self.summaryfile + ' not found!')
+            return None
+
+
+    def createsummary(self):
+        infor = ""
+        print("current time:",self.time)
+        if not os.path.exists(self.summaryfile):
+            with open(self.summaryfile,"a+") as file:
+                file.write("you have been in a good habit for{}\tdays,date:{} !\n".format(self.day,self.time))
+                infor = "you have been in a good habit for{}\tdays !\n".format(self.day)
+        else:
+            file = open(self.summaryfile,"a+")
+            lines = self.getlastline()
+            encoding = 'utf-8'
+            # 从byte到str 转化
+            line=lines.decode(encoding)
+            numdays = line.split("days")[0].split("for")[1]
+            
+            historydate = line.split("date:")[1].split("!")[0]
+            allhist = historydate.split("-")
+            alltoday = self.time.split("-")
+            c = False
+            #判断 是否是同一天
+            for a,b in zip(allhist,alltoday):
+                if int(a)==int(b):
+                    c = True
+                else:
+                    c = False
+                    break
+            if c:
+                infor = "you have signed today, do not try to sign again, come tomorrow!"
+            else:
+                self.day=int(numdays)+1
+                infor = "you have been in a good habit for{}\tdays,date:{} !\n".format(self.day,self.time)
+                file.write(infor)
+            file.close()
+        return infor
+
+
+
 
     def Gethits(self):
         a = ""

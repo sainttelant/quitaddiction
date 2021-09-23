@@ -319,7 +319,10 @@ class sign(QtCore.QThread):
     def run(self):
         self.signtext_signal.emit("click sign if you keep good habits!!")
         text = self.api.Gethits()
+        text1=self.api.createsummary()
+        #self.api.getlastline()
         self.signtext_signal.emit(text)
+        self.signtext_signal.emit(text1)
 
     
 
