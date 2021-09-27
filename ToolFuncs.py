@@ -7,10 +7,12 @@ import time
 
 import cv2
 from PyQt5 import QtCore, QtWidgets
+#打开文件夹相关和文件相关
+from PyQt5.QtWidgets import QFileDialog
 
 from APIs import SignSpider, Spiders
 from ToolUI import Ui_MainWindow
-
+from videoUtils import VideoProcess
 
 class MainUI(Ui_MainWindow):
     def __init__(self):
@@ -31,11 +33,8 @@ class MainUI(Ui_MainWindow):
             lambda: self.selectInfo("About", self.aboutmsg))  # 关于软件
         self.actionAuthor.triggered.connect(
             lambda: self.selectInfo("Author", self.authormsg))  # 关于作者
-        self.pushButton_3.clicked.connect(self.startdsr)  # DSR开始按钮
-        #self.pushButton_4.clicked.connect(self.startlink)  # 主图开始按钮
+        self.pushButton_3.clicked.connect(self.startpunish)  # DSR开始按钮
 
-        # capture button click
-        # self.pushButton_5.clicked.connect(self.startimg)  # 批量下载图片开始按钮
         self.pushButton_5.clicked.connect(self.capture)
         # 签到是pushbotton4 ， 显示是 text4
         self.pushButton_4.clicked.connect(self.sign)
@@ -55,36 +54,28 @@ class MainUI(Ui_MainWindow):
     def selectInfo(self, thetitle, megs):
         QtWidgets.QMessageBox.about(self, thetitle, megs)
 
-    # 提取DSR中商品类型
-    def changePD(self):
-        if self.radioButton_1.isChecked():
-            product = "tmall"
-        if self.radioButton_2.isChecked():
-            product = "jingdong"
-        return product
+
 
     # 更新状态栏
     def statusshow(self, astr):
         self.statusbar.showMessage(astr)
 
-    # DSR槽函数---------------------------------------------------------------------------------------------------
-    # 启动DSR线程的槽函数
-    def startdsr(self):
+  
+  
+    # 启动惩罚机制，随机删除文件 
+    def startpunish(self):
         self.statusbar.setStyleSheet("color:green")
-        self.pushButton_5.setDisabled(True)  # 线程启动锁定按钮
-        self.textEdit_3.setText("")  # 插入一个空白，每次启动线程都可以清屏
-        txtname = self.lineEdit_34.text()
-        """
-        product = self.changePD()
-        self.dsrthread = dsrThread(txtname, product)
-        self.dsrthread.status_signal.connect(self.statusshow)
-        self.dsrthread.dsrtext_signal.connect(self.dsrtextshow)
-        self.dsrthread.dsrprogmax_signal.connect(self.dsrprog_max)
-        self.dsrthread.dsrprog_signal.connect(self.dsrprog_value)
-        self.dsrthread.finished.connect(self.dsrpushon)  # 线程结束执行函数
-        self.dsrthread.start()
-        """
-    # 线程结束后开启DSR按钮
+        self.pushButton_3.setDisabled(True)
+        self.textEdit_3.setText("")
+        directory = QFileDialog.getExistingDirectory(self,"choose the folder","./")
+        print(directory)
+        self.fileThread = FileThread(directory)
+        self.fileThread.File_signal.connect(self.punishtextshow)
+        self.fileThread.finished.connect(self.punishfinish)
+        self.fileThread.start()
+
+
+   
 
     def dsrpushon(self):
         self.pushButton_1.setDisabled(False)
@@ -172,6 +163,12 @@ class MainUI(Ui_MainWindow):
 
     def imgtextshow(self, astr):
         self.textEdit_5.append(astr)
+
+    def punishtextshow(self,astr):
+        self.textEdit_3.append(astr)
+    
+    def punishfinish(self):
+        self.pushButton_3.setDisabled(False)
 
     def signtextshow(self,astr):
         self.textEdit_4.append(astr)
@@ -325,6 +322,30 @@ class sign(QtCore.QThread):
         self.signtext_signal.emit(text1)
 
     
+class FileThread(QtCore.QThread):
+    File_signal =QtCore.pyqtSignal(str)
+    def __init__(self,folder):
+        super().__init__()
+        self.folder = folder
+        
+    
+    def run(self):
+        self.File_signal.emit("you should specify a folder which contains many videos you are keen on!\n")
+        self.File_signal.emit("one of files will be randomly deleted at once you click the choose button! \n")
+        for allthings in os.listdir(self.folder):
+            if os.path.isdir(allthings):
+                self.File_signal.emit("there is a folder:{} here, currently, we pass it!\n".format(allthings))
+            elif os.path.isfile(allthings):
+                self.File_signal.emit("show the file:{}\n".format(allthings))
+        for a,b,c in os.walk(self.folder):
+            for video in c:
+                absvideo = os.path.join(self.folder, video)
+                key_encript = "5df1b4e0d7ca82a62177e3518fe2f35a"
+                kid_encript = "d0d28b3dd265e02ccf4612d4bd22c24f"
+                videoprocess = VideoProcess(absvideo,key_encript,kid_encript)
+                #videoprocess.startencrytion()
+                videoprocess.startdecrytion()
+        print("all done!!")
 
 
 

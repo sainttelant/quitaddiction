@@ -81,35 +81,16 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
         self.groupBox_31 = QtWidgets.QGroupBox(self.tab_3)
-        self.groupBox_31.setGeometry(QtCore.QRect(340, 240, 631, 361))
+        self.groupBox_31.setGeometry(QtCore.QRect(330, 240, 631, 361))
         self.groupBox_31.setObjectName("groupBox_31")
-        self.progressBar_3 = QtWidgets.QProgressBar(self.groupBox_31)
-        self.progressBar_3.setGeometry(QtCore.QRect(289, 75, 201, 20))
-        self.progressBar_3.setProperty("value", 24)
-        self.progressBar_3.setObjectName("progressBar_3")
         self.pushButton_3 = QtWidgets.QPushButton(self.groupBox_31)
-        self.pushButton_3.setGeometry(QtCore.QRect(40, 70, 91, 30))
+        self.pushButton_3.setGeometry(QtCore.QRect(200, 70, 181, 30))
         self.pushButton_3.setIcon(icon)
         self.pushButton_3.setIconSize(QtCore.QSize(20, 20))
         self.pushButton_3.setObjectName("pushButton_3")
-        self.label_8 = QtWidgets.QLabel(self.groupBox_31)
-        self.label_8.setGeometry(QtCore.QRect(40, 30, 81, 24))
-        self.label_8.setObjectName("label_8")
-        self.lineEdit_31 = QtWidgets.QLineEdit(self.groupBox_31)
-        self.lineEdit_31.setGeometry(QtCore.QRect(132, 33, 131, 21))
-        self.lineEdit_31.setObjectName("lineEdit_31")
         self.textEdit_3 = QtWidgets.QTextEdit(self.groupBox_31)
         self.textEdit_3.setGeometry(QtCore.QRect(40, 120, 561, 231))
         self.textEdit_3.setObjectName("textEdit_3")
-        self.label_9 = QtWidgets.QLabel(self.groupBox_31)
-        self.label_9.setGeometry(QtCore.QRect(160, 72, 101, 24))
-        self.label_9.setObjectName("label_9")
-        self.label_10 = QtWidgets.QLabel(self.groupBox_31)
-        self.label_10.setGeometry(QtCore.QRect(330, 30, 68, 24))
-        self.label_10.setObjectName("label_10")
-        self.lineEdit_32 = QtWidgets.QLineEdit(self.groupBox_31)
-        self.lineEdit_32.setGeometry(QtCore.QRect(430, 30, 141, 24))
-        self.lineEdit_32.setObjectName("lineEdit_32")
         self.groupBox_23 = QtWidgets.QGroupBox(self.tab_3)
         self.groupBox_23.setGeometry(QtCore.QRect(340, 20, 601, 201))
         self.groupBox_23.setObjectName("groupBox_23")
@@ -162,7 +143,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.menubar.addAction(self.menu_H.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -179,11 +160,8 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.groupBox_32.setTitle(_translate("MainWindow", "             if you were Kept Good habits, then Sign in below, otherwise, go to violate!"))
         self.pushButton_4.setText(_translate("MainWindow", "Sign in"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Sign in Daily"))
-        self.groupBox_31.setTitle(_translate("MainWindow", " Begin to Run!"))
-        self.pushButton_3.setText(_translate("MainWindow", "Begin"))
-        self.label_8.setText(_translate("MainWindow", "Files name:"))
-        self.label_9.setText(_translate("MainWindow", "progress bar:"))
-        self.label_10.setText(_translate("MainWindow", "Photo:"))
+        self.groupBox_31.setTitle(_translate("MainWindow", " Violate the rules, then choose a folder where a random video will be deleted!"))
+        self.pushButton_3.setText(_translate("MainWindow", "Choose a folder"))
         self.groupBox_23.setTitle(_translate("MainWindow", "Instruction"))
         self.label_3.setText(_translate("MainWindow", "<html><head/><body><p>1、sign in everyday, if you don\'t break the ring,release yourself </p><p>2、Record your progress everyday, you will witness your success!</p><p>3、click violate if you break the ring, a little trick punishment</p><p>4、Inform your community or friends what is your trouble </p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Violate"))
@@ -197,14 +175,8 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.actionAuthor.setText(_translate("MainWindow", "Author"))
 
         # 添加默认值
-
-        self.lineEdit_31.setText("img_links.txt")
-        self.lineEdit_32.setText("PICs")
         self.lineEdit_36.setText("Myface")
-        # 设置提示语
-        for each in [self.lineEdit_31]:
-            each.setToolTip("温馨提示：请先确认文件是否存在！")
-        self.lineEdit_32.setToolTip("警告：请勿使用非法文件名称，否则程序会崩溃！")
+  
         # 设置鼠标样式和提示语
         
         for each in [self.pushButton_3, self.pushButton_4, self.pushButton_5]:

@@ -136,7 +136,7 @@ class SignSpider(object):
                                     a = infors.get_text()
                 else:
                     msg = "get hits'channel failure! check the internet request!"
-                    print(msg)
+                    #print(msg)
                     return msg
         else:
             print("gethits locally!")
@@ -146,7 +146,7 @@ class SignSpider(object):
                     self.sentense.append(line)
 
             size_sentense = len(self.sentense)
-            print(self.sentense[random.randint(0, size_sentense)])
+            #print(self.sentense[random.randint(0, size_sentense)])
             a = self.sentense[random.randint(0, size_sentense)]
 
         return a

@@ -37,7 +37,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
@@ -223,39 +223,26 @@
      <widget class="QGroupBox" name="groupBox_31">
       <property name="geometry">
        <rect>
-        <x>340</x>
+        <x>330</x>
         <y>240</y>
         <width>631</width>
         <height>361</height>
        </rect>
       </property>
       <property name="title">
-       <string> Begin to Run!</string>
+       <string> Violate the rules, then choose a folder where a random video will be deleted!</string>
       </property>
-      <widget class="QProgressBar" name="progressBar_3">
-       <property name="geometry">
-        <rect>
-         <x>289</x>
-         <y>75</y>
-         <width>201</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="value">
-        <number>24</number>
-       </property>
-      </widget>
       <widget class="QPushButton" name="pushButton_3">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>200</x>
          <y>70</y>
-         <width>91</width>
+         <width>181</width>
          <height>30</height>
         </rect>
        </property>
        <property name="text">
-        <string>Begin</string>
+        <string>Choose a folder</string>
        </property>
        <property name="icon">
         <iconset>
@@ -268,29 +255,6 @@
         </size>
        </property>
       </widget>
-      <widget class="QLabel" name="label_8">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>30</y>
-         <width>81</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Files name:</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEdit_31">
-       <property name="geometry">
-        <rect>
-         <x>132</x>
-         <y>33</y>
-         <width>131</width>
-         <height>21</height>
-        </rect>
-       </property>
-      </widget>
       <widget class="QTextEdit" name="textEdit_3">
        <property name="geometry">
         <rect>
@@ -298,42 +262,6 @@
          <y>120</y>
          <width>561</width>
          <height>231</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_9">
-       <property name="geometry">
-        <rect>
-         <x>160</x>
-         <y>72</y>
-         <width>101</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>progress bar:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_10">
-       <property name="geometry">
-        <rect>
-         <x>330</x>
-         <y>30</y>
-         <width>68</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Photo:</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEdit_32">
-       <property name="geometry">
-        <rect>
-         <x>430</x>
-         <y>30</y>
-         <width>141</width>
-         <height>24</height>
         </rect>
        </property>
       </widget>
