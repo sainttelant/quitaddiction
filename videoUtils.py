@@ -1,12 +1,14 @@
 from subprocess import check_output, STDOUT, CalledProcessError
 from typing import Set
-
+import os
 class VideoProcess:
     def __init__(self,filename,key_encript,key_decript):
         self.filename = filename
-       
         self.encryptionname_suffix = self.filename.split(".")[1]
-        self.encryptionname = self.filename.split(".")[0]+"_encrypt"+"."+self.encryptionname_suffix
+        if not "_encrypt" in self.filename:
+            self.encryptionname = self.filename.split(".")[0]+"_encrypt"+"."+self.encryptionname_suffix
+        else:
+            self.encryptionname = self.filename.split(".")[0].replace("_encrypt","")+"." + self.encryptionname_suffix
         self.key_encript = ""
         self.key_decript = ""
         self.schema_encript = "cenc-aes-ctr"
@@ -30,7 +32,7 @@ class VideoProcess:
             '-i', self.filename, 
             '-vcodec', 'copy', self.encryptionname]
         return ffmpeg_command
-        
+
     def startdecrytion(self):
         
         decript_command= self.SetdecriptCommand()
@@ -44,14 +46,12 @@ class VideoProcess:
 
 
     def startencrytion(self):
-
         ffmpeg_commands = self.SetCommand()    
-
         try:
             output_ffmpeg_execution = check_output(ffmpeg_commands, stderr=STDOUT)
             print(output_ffmpeg_execution)
         except CalledProcessError as e:
             print(e)
             print(e.output)
-            
+        os.remove(self.filename)
    
