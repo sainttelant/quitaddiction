@@ -69,11 +69,15 @@ class MainUI(Ui_MainWindow):
         self.pushButton_3.setDisabled(True)
         self.textEdit_3.setText("")
         directory = QFileDialog.getExistingDirectory(self,"choose the folder","./")
-        print(directory)
-        self.fileThread = FileThread(directory)
-        self.fileThread.File_signal.connect(self.punishtextshow)
-        self.fileThread.finished.connect(self.punishfinish)
-        self.fileThread.start()
+        if directory == "":
+            print("you haven't chosen a folder!")
+            self.pushButton_3.setDisabled(False)
+            self.textEdit_3.setText("you haven't chosen a folder!")
+        else:
+            self.fileThread = FileThread(directory)
+            self.fileThread.File_signal.connect(self.punishtextshow)
+            self.fileThread.finished.connect(self.punishfinish)
+            self.fileThread.start()
 
 
    
@@ -182,129 +186,6 @@ class MainUI(Ui_MainWindow):
         self.progressBar_3.setValue(i)
 
 
-# DSR线程
-class dsrThread(QtCore.QThread):
-    status_signal = QtCore.pyqtSignal(str)  # 发送给状态栏的信号
-    dsrtext_signal = QtCore.pyqtSignal(str)  # 发送给DSR输出框的信号
-    dsrprogmax_signal = QtCore.pyqtSignal(int)  # 发送给进度条的信号，给出最大值
-    dsrprog_signal = QtCore.pyqtSignal(int)  # 发送给进度条的信号，给出每次刷新的进度
-
-    def __init__(self, txtname, product):  # 参数：读取的文件名，商品类型
-        super().__init__()
-        self.txtname = txtname
-        self.product = product
-        self.api = Spiders()
-
-    def run(self):
-        start = time.time()
-        T = datetime.datetime.now()
-        self.status_signal.emit("当前状态：正在进行DSR提取操作...")
-        try:
-            IDs = self.api.get_Infos(self.txtname)
-        except:
-            self.dsrtext_signal.emit(
-                self.api.getmsg("读取文件失败，请检查文件名称是否有误！", "red"))
-        else:
-            nums = len(IDs)
-            self.dsrprogmax_signal.emit(nums)
-            i = 1
-            if self.product == "tmall":
-                outfile = "TMdsr_" + \
-                    T.strftime("%Y%m%d%H%M") + "_" + str(nums) + ".csv"
-                self.dsrtext_signal.emit(self.api.getmsg(
-                    "商品类型为【天猫商品】，有效ID总计{}个，开始提取DSR".format(nums), "#464749"))
-                with open(outfile, 'w') as f:
-                    f.write('商品ID,评分,评论数\n')
-                for each in IDs:
-                    try:
-                        self.api.get_TM(each, outfile)
-                    except:
-                        msg_b = "总计{}个商品ID,第{}个商品：{}写入信息失败！".format(
-                            nums, i, each)
-                        self.dsrtext_signal.emit(self.api.getmsg(msg_b, "red"))
-                    else:
-                        msg_c = "总计{}个商品ID,成功写入第{}个天猫商品：{}".format(
-                            nums, i, each)
-                        self.dsrtext_signal.emit(
-                            self.api.getmsg(msg_c, "#464749"))
-                        self.dsrprog_signal.emit(i)
-                    i += 1
-            elif self.product == "jingdong":
-                outfile = "JDdsr_" + \
-                    T.strftime("%Y%m%d%H%M") + "_" + str(nums) + ".csv"
-                self.dsrtext_signal.emit(self.api.getmsg(
-                    "商品类型为【京东商品】，有效ID总计{}个，开始提取DSR".format(nums), "#464749"))
-                with open(outfile, 'w') as f:
-                    f.write('SKUID,好评率,好评数,中评数,差评数\n')
-                for each in IDs:
-                    try:
-                        self.api.get_JD(each, outfile)
-                    except:
-                        msg_b = "总计{}个商品ID,第{}个商品：{}写入信息失败！".format(
-                            nums, i, each)
-                        self.dsrtext_signal.emit(self.api.getmsg(msg_b, "red"))
-                    else:
-                        msg_c = "总计{}个商品ID,成功写入第{}个京东商品：{}".format(
-                            nums, i, each)
-                        self.dsrtext_signal.emit(
-                            self.api.getmsg(msg_c, "#464749"))
-                        self.dsrprog_signal.emit(i)
-                    i += 1
-            end = time.time()
-            msg_d = "DSR提取完毕，耗时：%0.2f秒！\n数据保存在当前目录下表格  %s  中" % (
-                float(end - start), outfile)
-            self.dsrtext_signal.emit(self.api.getmsg(msg_d, "green"))
-        self.status_signal.emit("当前状态：DSR信息提取操作完毕！")
-
-
-class linkThread(QtCore.QThread):
-    status_signal = QtCore.pyqtSignal(str)
-    linktext_signal = QtCore.pyqtSignal(str)
-    progmax_signal = QtCore.pyqtSignal(int)
-    progvalue_signal = QtCore.pyqtSignal(int)
-
-    def __init__(self, txtname):
-        super().__init__()
-        self.txtname = txtname
-        self.api = Spiders()
-
-    def run(self):
-        start = time.time()
-        T = datetime.datetime.now()
-        self.status_signal.emit("当前状态：正在进行天猫主图链接提取操作...")
-        try:
-            IDs = self.api.get_Infos(self.txtname)
-        except:
-            self.linktext_signal.emit(
-                self.api.getmsg("读取文件失败，请检查文件名称是否有误！", "red"))
-        else:
-            nums = len(IDs)
-            outfile = "links_" + \
-                T.strftime("%Y%m%d%H%M") + "_" + str(nums) + ".csv"
-            with open(outfile, "w") as f:
-                f.write("商品ID,主图链接,原价,折扣价" + "\n")
-            self.progmax_signal.emit(nums)
-            self.linktext_signal.emit(self.api.getmsg(
-                "读取文件成功，有效ID总计{}个，开始提取天猫主图链接".format(nums), "#464749"))
-            i = 1
-            for each in IDs:
-                try:
-                    self.api.getimglink(each, outfile)
-                except:
-                    msg_b = "总计{}个商品ID,第{}个商品：{}写入信息失败！".format(nums, i, each)
-                    self.linktext_signal.emit(self.api.getmsg(msg_b, "red"))
-                else:
-                    msg_c = "总计{}个商品ID,成功写入第{}个天猫主图信息：{}".format(nums, i, each)
-                    self.linktext_signal.emit(
-                        self.api.getmsg(msg_c, "#464749"))
-                    self.progvalue_signal.emit(i)
-                    
-                i += 1
-            end = time.time()
-            msg_d = "天猫主图链接提取完毕，耗时：%0.2f秒！\n数据保存在当前目录下表格  %s  中" % (
-                float(end - start), outfile)
-            self.linktext_signal.emit(self.api.getmsg(msg_d, "green"))
-        self.status_signal.emit("当前状态：天猫主图信息提取操作完毕！")
 
 class sign(QtCore.QThread):
     sign_signal  =QtCore.pyqtSignal(str)
@@ -328,7 +209,8 @@ class FileThread(QtCore.QThread):
     def __init__(self,folder):
         super().__init__()
         self.folder = folder
-        
+        if self.folder == None:
+            self.File_signal.emit("Please choose a folder \n")
     
     def run(self):
         self.File_signal.emit(">>>>>>>>>>>>>>>>>Attention please!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n")
@@ -336,22 +218,24 @@ class FileThread(QtCore.QThread):
         self.File_signal.emit("one of videos will be randomly encryted at once you click the choose button! \n")
         self.File_signal.emit("if you want to decript your video, you only have one chance to request! \n")
         self.File_signal.emit("you will be charged 5 dollars to unlock it \n")
-        for allthings in os.listdir(self.folder):
-            if os.path.isdir(allthings):
-                self.File_signal.emit("there is a folder:{} here, currently, we pass it!\n".format(allthings))
-            elif os.path.isfile(allthings):
-                self.File_signal.emit("show the file:{}\n".format(allthings))
-        for a,b,c in os.walk(self.folder):
-            numofvideos = len(c)
-            randomindex = random.randint(0,numofvideos-1)
-            absvideo = os.path.join(self.folder, c[randomindex])
-
-            self.File_signal.emit("the video {} will be encripted now \n".format(c[randomindex]))
-            key_encript = "5df1b4e0d7ca82a62177e3518fe2f35a"
-            kid_encript = "d0d28b3dd265e02ccf4612d4bd22c24f"
-            videoprocess = VideoProcess(absvideo,key_encript,kid_encript)
-            videoprocess.startencrytion()
-            #videoprocess.startdecrytion()
+        if self.folder!=None:
+            for allthings in os.listdir(self.folder):
+                if os.path.isdir(allthings):
+                    self.File_signal.emit("there is a folder:{} here, currently, we pass it!\n".format(allthings))
+                elif os.path.isfile(allthings):
+                    self.File_signal.emit("show the file:{}\n".format(allthings))
+            for a,b,c in os.walk(self.folder):
+                numofvideos = len(c)
+                randomindex = random.randint(0,numofvideos-1)
+                absvideo = os.path.join(self.folder, c[randomindex])
+                self.File_signal.emit("the video {} will be encripted now \n".format(c[randomindex]))
+                key_encript = "5df1b4e0d7ca82a62177e3518fe2f35a"
+                kid_encript = "d0d28b3dd265e02ccf4612d4bd22c24f"
+                videoprocess = VideoProcess(absvideo,key_encript,kid_encript)
+                videoprocess.startencrytion()
+                #videoprocess.startdecrytion()
+        else:
+            self.File_signal.emit("You haven't chosen a folder yet! \n")
         print("all done!!")
 
 
@@ -393,7 +277,11 @@ class capThread(QtCore.QThread):
                 count-=1
                 if(count==0):
                     self.captext_signal.emit("save it %s"%(picname))
-                    cv2.imwrite(picname, frame)
+                    try:
+                        cv2.imwrite(picname, frame)
+                    except:
+                        self.captext_signal.emit("Please Check the camera status!,make sure the camera opened!")
+
                     break
                 else:
                     continue

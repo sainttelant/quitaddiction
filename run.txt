@@ -6,3 +6,6 @@ DISPLAY=:0
 $ export DISPLAY=:0
 
 python ToolFuncs.py
+
+# build execute files
+pyinstaller -F --add-data "./ffmpeg/*:./ffmpeg/" ToolFuncs.py
