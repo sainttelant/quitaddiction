@@ -8,4 +8,42 @@ $ export DISPLAY=:0
 python ToolFuncs.py
 
 # build execute files
-pyinstaller -F --add-data "./ffmpeg/*:./ffmpeg/" ToolFuncs.py
+
+
+
+#安装环境
+win10 
+anaconda ： Anaconda3-2021.05-Windows-x86_64.exe
+pyinstaller： Name: PyInstaller
+Version: 3.6
+Summary: PyInstaller bundles a Python application and all its dependencies into a single package.
+Home-page: http://www.pyinstaller.org
+Author: Giovanni Bajo, Hartmut Goebel, David Vierra, David Cortesi, Martin Zibricky
+Author-email: pyinstaller@googlegroups.com
+License: GPL license with a special exception which allows to use PyInstaller to build and distribute non-free programs (including commercial ones)
+Location: d:\software\anaconda3\lib\site-packages
+Requires: pefile, pywin32-ctypes, setuptools, altgraph
+
+pyqt5：
+Name: PyQt5
+Version: 5.15.4
+Summary: Python bindings for the Qt cross platform application toolkit
+Home-page: https://www.riverbankcomputing.com/software/pyqt/
+Author: Riverbank Computing Limited
+Author-email: info@riverbankcomputing.com
+License: GPL v3
+Location: d:\software\anaconda3\lib\site-packages
+Requires: PyQt5-Qt5, PyQt5-sip
+Required-by: spyder, pyqt5-tools, pyqt5-plugins
+
+#准备工作
+1、安装好aconda 和pyinstaller  pyqt5之后，将pyqt5 anaconda 目录下面所有的pyqt5 源文件夹包括tools plugin的全部拷贝到软件根目录下面
+
+2、将 anaconda 下面 library  bin，mkl_intel_thread.1.dll 文件拷贝到thirdpartybin 文件夹下
+
+#运行命令行
+chcp 65001
+
+pyinstaller -F --add-data "./ffmpeg/*;./ffmpeg/" --add-data "./thirdpartybin/*;./thirdpartybin/" -i click.ico ToolFuncs.py 
+
+#如果还有报错，则需要将 mkl_intel_thread.1.dll 拷贝到exe  dist目录下面

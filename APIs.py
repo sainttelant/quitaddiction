@@ -113,7 +113,7 @@ class SignSpider(object):
         k = random.randint(0, 50)
         j = 0
         if not os.path.exists(self.filename):
-            with open(self.path+"/wisdoms.txt", "a") as f:
+            with open(self.path+"/wisdoms.txt", "a",encoding="utf-8") as f:
                 print("begin to get hits!")
                 ret = self.s.get(self.url, headers=self.headers)
                 ret.encoding = ret.apparent_encoding
@@ -140,7 +140,7 @@ class SignSpider(object):
                     return msg
         else:
             print("gethits locally!")
-            with open(self.filename, "r") as f:
+            with open(self.filename, "r",encoding='UTF-8') as f:
                 lines = f.readlines()
                 for line in lines:
                     self.sentense.append(line)

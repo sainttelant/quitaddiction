@@ -1,20 +1,16 @@
 # -*- coding: utf-8 -*-
-
 import datetime
 import os.path
 import random
 import sys
 import time
-
 import cv2
 from PyQt5 import QtCore, QtWidgets
 #打开文件夹相关和文件相关
 from PyQt5.QtWidgets import QFileDialog
-
 from APIs import SignSpider, Spiders
 from ToolUI import Ui_MainWindow
 from videoUtils import VideoProcess
-
 class MainUI(Ui_MainWindow):
     def __init__(self):
         super().__init__()
